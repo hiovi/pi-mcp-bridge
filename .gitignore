@@ -1,0 +1,9 @@
+# config
+mcp-servers.json
+
+# node / npm
+node_modules/
+package-lock.json
+
+# os
+.DS_Store

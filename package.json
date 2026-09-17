@@ -1,0 +1,16 @@
+{
+  "name": "pi-mcp-bridge",
+  "version": "0.1.0",
+  "description": "MCP support for the pi coding agent: bridges streamable-HTTP MCP servers into native pi tools",
+  "keywords": ["pi-package", "mcp", "pi"],
+  "license": "MIT",
+  "type": "module",
+  "pi": {
+    "extensions": ["./extensions"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  }
+}
