@@ -11,7 +11,8 @@ pi has no built-in MCP (by design: "build an extension that adds MCP support"). 
 - **Graceful degradation** — a server that is down (e.g. Paper.app not running) is skipped with a warning instead of killing startup.
 - **Session recovery** — a dropped MCP session (server restart) is silently re-initialized once per call.
 - **Server instructions** — an optional per-server `instructions` string is attached to the prompt once (e.g. "call get_guide first").
-- **`/mcp` command** — reports each server's status; `/mcp reconnect` retries failed connections.
+- **OAuth 2.1** — hosted servers that require a browser sign-in (e.g. a1.gallery) work with `"auth": "oauth"`: RFC 9728 resource discovery, RFC 8414 metadata, RFC 7591 dynamic client registration, PKCE authorization code, local `127.0.0.1` callback. Tokens are stored in `~/.pi/agent/mcp-auth.json` (mode 0600) and refreshed on expiry or 401. The browser is never opened at startup; sign in once with `/mcp login <server>`.
+- **`/mcp` command** — reports each server's status; `/mcp reconnect` retries failed connections; `/mcp login <server>` / `/mcp logout <server>` manage OAuth credentials.
 
 ## Install
 
@@ -35,6 +36,23 @@ Create `~/.pi/agent/mcp-servers.json` with a Claude-compatible shape. Only `type
   }
 }
 ```
+
+For an OAuth server, omit `headers` and set `auth`:
+
+```json
+{
+  "mcpServers": {
+    "a1": {
+      "type": "http",
+      "url": "https://www.a1.gallery/api/mcp",
+      "auth": "oauth",
+      "instructions": "Curated design references with measured tokens; use for layout and type decisions."
+    }
+  }
+}
+```
+
+Then run `/mcp login a1` inside pi, sign in in the browser, and `/reload`.
 
 Restart pi (or run `/reload`) after editing the config file.
 

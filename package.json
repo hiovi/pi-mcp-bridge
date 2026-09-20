@@ -1,6 +1,6 @@
 {
   "name": "pi-mcp-bridge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MCP support for the pi coding agent: bridges streamable-HTTP MCP servers into native pi tools",
   "keywords": ["pi-package", "mcp", "pi"],
   "license": "MIT",
